@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
+            <!--<charset>UTF-8</charset>--><!--注释掉，解决Windows CMD 运行时 log 乱码-->
+        </encoder>
+    </appender>
+
+    <appender name="error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--通过SizeAndTimeBasedRollingPolicy执行策略，按大小|时间周期将日志文本文件以[日期.i.log]的方式进行存储-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件名称格式 -->
+            <FileNamePattern>${log.path}/error.log.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--最长的日志记录周期 -->
+            <MaxHistory>60</MaxHistory>
+            <!--最大的单日志文件的大小 -->
+            <maxFileSize>100MB</maxFileSize>
+            <!--日志文件总大小 -->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <!-- 输出的日志格式，引用前面property定义的输出格式 -->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="apiIron" additivity="false" level="INFO">
+        <!--打到控制台-->
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="error_log"/>
+    </logger>
+
+    <!--系统级的日志(默认） info和error分开打印-->
+    <root level="INFO">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="error_log"/>
+    </root>
+
+</configuration>
