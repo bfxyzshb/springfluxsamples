@@ -12,7 +12,7 @@ import static io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS;
 /**
  * 修改flux 默认的netty配置
  */
-@Component
+//@Component
 public class ContainerConfig extends ReactiveWebServerFactoryCustomizer {
     public ContainerConfig(ServerProperties serverProperties) {
         super(serverProperties);
@@ -24,8 +24,8 @@ public class ContainerConfig extends ReactiveWebServerFactoryCustomizer {
         nettyFactory.setResourceFactory(null);
         nettyFactory.addServerCustomizers(server ->
                 server.tcpConfiguration(tcpServer ->
-                        tcpServer.runOn(LoopResources.create("my-flux", Runtime.getRuntime().availableProcessors() * 4, Runtime.getRuntime().availableProcessors() * 8, true))
-                                .selectorOption(CONNECT_TIMEOUT_MILLIS, 200)
+                        tcpServer.runOn(LoopResources.create("spring-flux", 1, 1, true))
+                                //  .selectorOption(CONNECT_TIMEOUT_MILLIS, 200)
                 )
         );     
     }

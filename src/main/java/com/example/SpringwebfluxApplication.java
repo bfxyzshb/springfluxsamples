@@ -1,18 +1,13 @@
-package com.example.springwebflux;
+package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
-import java.io.IOException;
 
 @SpringBootApplication
 @RestController
@@ -89,9 +84,7 @@ public class SpringwebfluxApplication {
 }
 
 class Pet{
-    @NotNull(message = "Name cannot be empty")
     public String name;
-    @NotNull(message = "Gender cannot be empty")
     public GENDER gender;
 
     public Pet() {}

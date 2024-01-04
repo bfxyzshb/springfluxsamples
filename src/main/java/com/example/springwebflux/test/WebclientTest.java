@@ -26,20 +26,20 @@ public class WebclientTest {
 
         WebClient webClient = WebClient.create("http://localhost:8083");
         Scheduler  scheduler=Schedulers.elastic();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1; i++) {
             //Mono.just(i).flatMap(v->Mono.just(v)).subscribeOn(scheduler).doOnNext(v-> System.out.println(v+"=="+Thread.currentThread().getName())).subscribe();
-            /*webClient.get()
+            webClient.get()
                     .uri("/testInt?value=" + i)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()//获取响应，这里的响应不是真正的数据
                     //将响应数据转换成 Flux（响应集合数据用Flux） 或这 Mono（单个响应数据用 Mono）
-                    .bodyToMono(Integer.class).timeout(Duration.ofMillis(20000))*//*.subscribeOn(Schedulers.newSingle("test"))*//*.onErrorResume(v -> {
+                    .bodyToMono(Integer.class).timeout(Duration.ofMillis(20000)).subscribeOn(Schedulers.newSingle("test")).onErrorResume(v -> {
                                 System.out.println("==========="+v+"==="+Thread.currentThread().getName());
                                 return Mono.just(11111);
                             }
                     ).doOnNext(v->{
                         System.out.println(v+"---"+Thread.currentThread().getName());
-                    }).subscribe();*/
+                    }).subscribe();
 
 
 

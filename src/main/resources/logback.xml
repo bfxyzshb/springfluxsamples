@@ -17,7 +17,7 @@
             <!--最长的日志记录周期 -->
             <MaxHistory>60</MaxHistory>
             <!--最大的单日志文件的大小 -->
-            <maxFileSize>100MB</maxFileSize>
+            <maxFileSize>10GB</maxFileSize>
             <!--日志文件总大小 -->
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
@@ -27,14 +27,14 @@
         </encoder>
     </appender>
 
-    <logger name="apiIron" additivity="false" level="INFO">
+    <logger name="apiIron" additivity="false" level="DEBUG">
         <!--打到控制台-->
         <!--<appender-ref ref="CONSOLE"/>-->
         <appender-ref ref="error_log"/>
     </logger>
 
     <!--系统级的日志(默认） info和error分开打印-->
-    <root level="INFO">
+    <root level="DEBUG">
         <!--<appender-ref ref="CONSOLE"/>-->
         <appender-ref ref="error_log"/>
     </root>
